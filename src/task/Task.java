@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public abstract class Task implements Repeatable {
     private static int nextId;
-    private final int id = ++nextId;
+    private final int id;
     private final String name;
     private final Type type;
     private LocalDateTime dateTime;
@@ -17,6 +17,7 @@ public abstract class Task implements Repeatable {
                 Type type,
                 LocalDateTime dateTime,
                 String description) throws InvalidInputDataException {
+        id = ++nextId;
         this.name = name;
         this.type = type;
         setDateTime(dateTime);
@@ -36,11 +37,10 @@ public abstract class Task implements Repeatable {
     }
 
     public void setDateTime(LocalDateTime dateTime) throws InvalidInputDataException {
-        if (isValidDateTime(dateTime)) {
-            this.dateTime = dateTime;
-        } else {
+        if (!isValidDateTime(dateTime)) {
             throw new InvalidInputDataException(dateTime + " - недействительная дата");
         }
+        this.dateTime = dateTime;
     }
 
     public Type getType() {
