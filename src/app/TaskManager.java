@@ -75,22 +75,20 @@ public class TaskManager {
         System.out.print("Введите название задачи: ");
         scanner.nextLine();
         String name = scanner.nextLine();
-        if (Task.isValidName(name)) {
-            return name;
-        } else {
+        if (!Task.isValidName(name)) {
             throw new InvalidInputDataException("Название задачи отсутствует!");
         }
+        return name;
     }
 
     private String inputTaskDescription(Scanner scanner) throws InvalidInputDataException {
         System.out.print("Введите описание задачи: ");
         scanner.nextLine();
         String description = scanner.nextLine();
-        if (Task.isValidDescription(description)) {
-            return description;
-        } else {
+        if (!Task.isValidDescription(description)) {
             throw new InvalidInputDataException("Описание задачи отсутствует!");
         }
+        return description;
     }
 
     private LocalDate inputDate(Scanner scanner) throws InvalidInputDataException {
@@ -134,14 +132,11 @@ public class TaskManager {
     }
 
     private LocalDateTime inputDateTime(Scanner scanner) throws InvalidInputDataException {
-        LocalDate date = inputDate(scanner);
-        LocalTime time = inputTime(scanner);
-        LocalDateTime dateTime = LocalDateTime.of(date, time);
-        if (Task.isValidDateTime(dateTime)) {
-            return dateTime;
-        } else {
+        LocalDateTime dateTime = LocalDateTime.of(inputDate(scanner), inputTime(scanner));
+        if (!Task.isValidDateTime(dateTime)) {
             throw new InvalidInputDataException(dateTime + " - недействительная дата");
         }
+        return dateTime;
     }
 
     private Task.Type inputTaskType(Scanner scanner) throws InvalidInputDataException {
