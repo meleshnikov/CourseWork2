@@ -32,6 +32,10 @@ public abstract class Task implements Repeatable {
         return name;
     }
 
+    public Type getType() {
+        return type;
+    }
+
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -43,20 +47,15 @@ public abstract class Task implements Repeatable {
         this.dateTime = dateTime;
     }
 
-    public Type getType() {
-        return type;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) throws InvalidInputDataException {
-        if (isValidDescription(description)) {
-            this.description = description;
-        } else {
+        if (!isValidDescription(description)) {
             throw new InvalidInputDataException("Описание задачи отсутствует!");
         }
+        this.description = description;
     }
 
     public enum Type {Personal, Work}
@@ -96,6 +95,4 @@ public abstract class Task implements Repeatable {
     public static boolean isValidDateTime(LocalDateTime dateTime) {
         return dateTime != null && dateTime.isAfter(LocalDateTime.now());
     }
-
-
 }
