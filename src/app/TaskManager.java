@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class TaskManager {
 
-    private final TaskService<Task> tasks = new TaskService<>();
+    private final TaskService tasks = new TaskService();
 
     public void run() {
         try (Scanner scanner = new Scanner(System.in)) {

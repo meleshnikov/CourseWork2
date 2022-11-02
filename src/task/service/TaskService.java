@@ -1,25 +1,24 @@
 package task.service;
 
-import task.Repeatable;
 import task.Task;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TaskService<T extends Task & Repeatable> {
+public class TaskService {
 
-    private final Map<Integer, T> tasks = new HashMap<>();
+    private final Map<Integer, Task> tasks = new HashMap<>();
 
-    public void add(T task) {
+    public void add(Task task) {
         tasks.put(task.getId(), task);
     }
 
-    public TaskService<Task> getTasksByDate(LocalDate date) {
+    public TaskService getTasksByDate(LocalDate date) {
 
-        TaskService<Task> result = new TaskService<>();
+        TaskService result = new TaskService();
 
-        for (T task : tasks.values()) {
+        for (Task task : tasks.values()) {
             if (task.whenNext() != null && task.whenNext().toLocalDate().equals(date)) {
                 result.add(task);
             }
