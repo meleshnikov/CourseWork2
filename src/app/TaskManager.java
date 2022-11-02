@@ -77,6 +77,7 @@ public class TaskManager {
         String name = scanner.nextLine();
         if (!Task.isValidName(name)) {
             throw new InvalidInputDataException("Название задачи отсутствует!");
+
         }
         return name;
     }
@@ -132,7 +133,9 @@ public class TaskManager {
     }
 
     private LocalDateTime inputDateTime(Scanner scanner) throws InvalidInputDataException {
-        LocalDateTime dateTime = LocalDateTime.of(inputDate(scanner), inputTime(scanner));
+        LocalDate date = inputDate(scanner);
+        LocalTime time = inputTime(scanner);
+        LocalDateTime dateTime = LocalDateTime.of(date, time);
         if (!Task.isValidDateTime(dateTime)) {
             throw new InvalidInputDataException(dateTime + " - недействительная дата");
         }
