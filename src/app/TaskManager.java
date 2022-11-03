@@ -77,6 +77,7 @@ public class TaskManager {
         String name = scanner.nextLine();
         if (!Task.isValidName(name)) {
             throw new InvalidInputDataException("Название задачи отсутствует!");
+
         }
         return name;
     }
