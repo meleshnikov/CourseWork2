@@ -19,7 +19,8 @@ public class TaskService {
         TaskService result = new TaskService();
 
         for (Task task : tasks.values()) {
-            if (task.whenNext() != null && task.whenNext().toLocalDate().equals(date)) {
+            var nextDate = task.whenNext();
+            if (nextDate != null && nextDate.toLocalDate().equals(date)) {
                 result.add(task);
             }
         }
